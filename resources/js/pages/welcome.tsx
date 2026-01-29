@@ -211,6 +211,7 @@ const App = ({ coordinates }: { coordinates: MarkerType[] }) => {
                 }
                 zoom={7}
                 style={{ height: '100%', width: '100%' }}
+                attributionControl={false}
             >
                 <LayersControl position="topright">
                     <LayersControl.BaseLayer checked name="Street Map">
