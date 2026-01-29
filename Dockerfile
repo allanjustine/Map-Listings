@@ -9,9 +9,13 @@ RUN apt-get update && apt-get install -y \
     libpng-dev \
     libonig-dev \
     libxml2-dev \
-    nodejs \
-    npm \
+    gnupg \
+    ca-certificates \
     && docker-php-ext-install pdo pdo_mysql mbstring exif pcntl bcmath gd
+
+# Install Node.js 20 LTS
+RUN curl -fsSL https://deb.nodesource.com/setup_20.x | bash - \
+    && apt-get install -y nodejs
 
 # Install Composer
 COPY --from=composer:2 /usr/bin/composer /usr/bin/composer
@@ -25,7 +29,8 @@ COPY . .
 RUN composer install --no-dev --optimize-autoloader
 
 # Install JS dependencies & build React (Vite)
-RUN npm install && npm run build
+RUN npm install
+RUN npm run build
 
 # Permissions
 RUN chown -R www-data:www-data /var/www \
