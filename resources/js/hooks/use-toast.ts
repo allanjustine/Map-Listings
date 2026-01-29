@@ -9,7 +9,7 @@ export default function useToast(flash: { error?: string; success?: string }) {
             toast.success('Success', {
                 description: flash?.success,
                 duration: 5000,
-                position: 'bottom-center',
+                position: 'top-center',
             });
         }
 
@@ -17,7 +17,7 @@ export default function useToast(flash: { error?: string; success?: string }) {
             toast.error('Error', {
                 description: flash?.error,
                 duration: 5000,
-                position: 'bottom-center',
+                position: 'top-center',
             });
         }
     }, [flash]);

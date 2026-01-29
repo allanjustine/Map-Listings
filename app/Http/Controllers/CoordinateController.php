@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Activity;
 use App\Models\Coordinate;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
@@ -15,11 +16,13 @@ class CoordinateController extends Controller
      */
     public function index()
     {
-        $data = Coordinate::all();
+        $data = Coordinate::query()
+            ->with('activities')
+            ->withCount('activities')
+            ->get();
 
         return Inertia::render('welcome', [
             'coordinates' => $data,
-            'storage'     => Storage::url(''),
         ]);
     }
 
@@ -38,7 +41,7 @@ class CoordinateController extends Controller
     {
         $request->validate([
             'title' => ['required', 'string', 'max:255', 'min:2'],
-            'icon'  => ['required', 'image', 'mimes:jpeg,png,jpg,gif,svg,ico,webp', 'max:2048'],
+            'icon'  => ['image', 'mimes:jpeg,png,jpg,gif,svg,ico,webp', 'max:2048'],
         ]);
 
         $path = "";
@@ -62,7 +65,7 @@ class CoordinateController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Coordinate $coordinate)
     {
         //
     }

@@ -141,3 +141,11 @@
         @apply bg-background text-foreground;
     }
 }
+
+.leaflet-routing-alternatives-container {
+    background-color: black;
+    padding: 0.5rem;
+    border-radius: 5px;
+    max-height: calc(100vh - 400px);
+    overflow-y: auto;
+}

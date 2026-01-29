@@ -57,7 +57,7 @@ export function AlertDialogDelete({
                         onClick={handleDelete}
                         variant={'destructive'}
                     >
-                        {isLoading ? 'Deleting...' : 'Delete Marker'}
+                        {isLoading ? 'Deleting...' : 'Yes, Delete!'}
                     </Button>
                 </AlertDialogFooter>
             </AlertDialogContent>

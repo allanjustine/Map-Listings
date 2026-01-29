@@ -1,0 +1,37 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: map_listing
+    restart: unless-stopped
+    volumes:
+      - .:/var/www
+    networks:
+      - map_listing
+
+    environment:
+      - DB_CONNECTION=mysql
+      - DB_HOST=172.17.0.1
+      - DB_PORT=3306
+      - DB_DATABASE=map_listing
+      - DB_USERNAME=smct
+      - DB_PASSWORD=smct
+
+  nginx:
+    image: nginx:alpine
+    container_name: map_listing_nginx
+    restart: unless-stopped
+    ports:
+      - "1616:1616"
+    volumes:
+      - .:/var/www
+      - ./default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - app
+    networks:
+      - map_listing
+
+networks:
+  map_listing:
+    driver: bridge

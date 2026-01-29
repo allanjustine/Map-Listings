@@ -5,6 +5,7 @@ import { createRoot } from 'react-dom/client';
 import '../css/app.css';
 import { Toaster } from './components/ui/sooner';
 import { initializeTheme } from './hooks/use-appearance';
+import './utils/leaflet-routing';
 import 'leaflet/dist/leaflet.css';
 
 const appName = import.meta.env.VITE_APP_NAME || 'Laravel';
